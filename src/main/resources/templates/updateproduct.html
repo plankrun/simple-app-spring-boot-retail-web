@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+
+<head>
+    <title>Update Product</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="container my-5">
+        <h2 class="text-center">Edit Product</h2>
+        <div class="widhtform">
+            <form th:action="@{/product/update/__${product.productId}__}" th:object="${product}" method="POST" class="custom_form">
+                <p style="margin-bottom: 10px">Product ID: <input type="text" th:field="*{productId}" class="form-control" readonly/></p>
+
+                <p style="margin-bottom: 10px">Product Name: <input type="text" th:field="*{productName}" class="form-control" placeholder="Input product name" required/></p>
+                <div th:if="${errorProductName != null}" style="margin-bottom: 5px">
+                    <small th:text="${errorProductName}" style="color: red"></small>
+                </div>
+
+                <p style="margin-bottom: 10px">Stock: <input type="number" th:field="*{stock}" class="form-control" placeholder="Input product stock" required/></p>
+                <div th:if="${errorStock != null}" style="margin-bottom: 5px">
+                    <small th:text="${errorStock}" style="color: red"></small>
+                </div>
+
+                <p style="margin-bottom: 10px">Price: <input type="number" th:field="*{price}" class="form-control" placeholder="Input product price" required/></p>
+                <div th:if="${errorPrice != null}" style="margin-bottom: 5px">
+                    <small th:text="${errorPrice}" style="color: red"></small>
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block btn-success" data-toggle="modal" type="button" data-target="#confirm">Submit</button>
+                <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Update Confirmation</h5>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to update this product?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div th:if="${error != null}">
+                <h5 th:text="${error}" style="color: red"></h5>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

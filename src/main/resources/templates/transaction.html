@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+
+<head>
+    <title>Transaction</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="container my-5">
+        <h2 class="text-center">Transaction List</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col">Tax</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="transaction : ${transactionAll}">
+                    <th th:text="${transaction.transactionId}" scope="row">1</th>
+                    <td th:text="${transaction.transactionDate}"></td>
+                    <td th:text="${transaction.username}"></td>
+                    <td th:text="${transaction.productName}"></td>
+                    <td th:text="${transaction.price}"></td>
+                    <td th:text="${transaction.quantity}"></td>
+                    <td th:text="${transaction.subtotal}"></td>
+                    <td th:text="${transaction.tax}"></td>
+                    <td th:text="${transaction.total}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="card" th:if="${error != null}" style="width: 100%; text-align: center">
+            <div class="card-body">
+                <h4 th:text="${error}" class="card-text"></h4>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

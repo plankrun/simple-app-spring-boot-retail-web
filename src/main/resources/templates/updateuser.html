@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+
+<head>
+    <title>Update User</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="container my-5">
+        <h2 class="text-center">Edit User</h2>
+        <div class="widhtform">
+            <form th:action="@{/user/update/__${user.userId}__}" th:object="${user}" method="POST" class="custom_form">
+                <p style="margin-bottom: 10px">User ID: <input type="text" th:field="*{userId}" class="form-control" readonly/></p>
+                <p style="margin-bottom: 10px">Username: <input type="text" th:field="*{username}" class="form-control" placeholder="Input username" required/></p>
+                <div th:if="${errorUsername != null}" style="margin-bottom: 5px">
+                    <small th:text="${errorUsername}" style="color: red"></small>
+                </div>
+
+                <p style="margin-bottom: 10px">Balance: <input type="number" th:field="*{balance}" class="form-control" placeholder="Input balance" required/></p>
+                <div th:if="${errorBalance != null}" style="margin-bottom: 5px">
+                    <small th:text="${errorBalance}" style="color: red"></small>
+                </div>
+
+                <p style="margin-bottom: 10px">Password: <input type="password" th:field="*{password}" class="form-control" placeholder="Input password" required/></p>
+                <div th:if="${errorPassword != null}" style="margin-bottom: 5px">
+                    <small th:text="${errorPassword}" style="color: red"></small>
+                </div>
+
+                <p style="margin-bottom: 10px">Confirm Password: <input type="password" class="form-control" placeholder="Please repeat your password" required/></p>
+
+                <p style="margin-bottom: 10px">Logged in? <input type="checkbox" th:field="*{isLoggedIn}"/></p>
+
+                <button class="btn btn-primary btn-lg btn-block btn-success" data-toggle="modal" type="button" data-target="#confirm">Submit</button>
+                <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Update Confirmation</h5>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to update this user?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-success">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div th:if="${error != null}">
+                <h5 th:text="${error}" style="color: red"></h5>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

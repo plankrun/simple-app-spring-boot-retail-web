@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+
+<head>
+    <title>Retail Application Home</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="container my-3" align="middle">
+        <h3>Selamat datang di Alfamart! Selamat belanja!</h3>
+        <img th:src="@{images/homebanner.png}" style="border: 3px solid #494949" alt="My Pic" width="750" height="400">
+    </div>
+
+    <div class="container my-5">
+        <div class="row text-center">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img th:src="@{images/usericon.png}" width="50" height="50" style="margin-bottom: 5px">
+                        <h4 class="card-title">User List</h4>
+                        <p style="margin-top: 5px">
+                            <a href="/retail/user" class="btn btn-primary" style="background-color: #0283e8">
+                                Show<br>
+                                <i class="fa fa-table" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img th:src="@{images/producticon.png}" width="50" height="50" style="margin-bottom: 5px">
+                        <h4 class="card-title">Product List</h4>
+                        <p style="margin-top: 5px">
+                            <a href="/retail/product" class="btn btn-primary" style="background-color: #0283e8">
+                                Show<br>
+                                <i class="fa fa-table" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img th:src="@{images/transactionicon.png}" width="50" height="50" style="margin-bottom: 5px">
+                        <h4 class="card-title">Transaction List</h4>
+                        <p style="margin-top: 5px">
+                            <a href="/retail/transaction" class="btn btn-primary" style="background-color: #0283e8">
+                                Show<br>
+                                <i class="fa fa-table" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

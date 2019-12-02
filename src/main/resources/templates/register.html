@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+
+<head>
+    <title>Register</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="container  my-5">
+        <h2 class="text-center">User Registration</h2>
+        <div class="custom_parent_form">
+            <form th:action="@{/user/register}" th:object="${user}" method="post" class="custom_form">
+                <div class="pb-3"><p style="margin-bottom: 5px">Username:</p>
+                    <input th:field="*{username}" type="text" class="form-control" placeholder="Input your username" required/>
+                    <div th:if="${errorUsername != null}">
+                        <small th:text="${errorUsername}" style="color: red"></small>
+                    </div>
+                </div>
+
+                <div class="pb-3"><p style="margin-bottom: 5px">Password:</p>
+                    <input th:field="*{password}" type="password" class="form-control" placeholder="Input your password" required/>
+                    <div th:if="${errorPassword != null}">
+                        <small th:text="${errorPassword}" style="color: red"></small>
+                    </div>
+                </div>
+
+                <div class="pb-3"><p style="margin-bottom: 5px">Confirm Password:</p>
+                    <input type="password" class="form-control" placeholder="Please repeat your password" required/>
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block btn-success" data-toggle="modal" type="button" data-target="#confirm">Submit</button>
+                <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Confirmation</h5>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to submit?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:if="${error != null}">
+                    <h5 th:text="${error}" style="color: red"></h5>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

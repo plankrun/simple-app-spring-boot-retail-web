@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+
+<head>
+    <title>Update User</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="container my-3">
+        <h2 class="text-center">User Detail</h2>
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title" th:inline="text">[[${user.username}]]</h5>
+                <p class="card-text" th:inline="text">User ID: [[${user.userId}]]</p>
+                <p class="card-text" th:inline="text">Login Status: [[${user.isLoggedIn}]]</p>
+                <p class="card-text" th:inline="text">Balance: Rp[[${user.balance}]]</p>
+                <a th:href="@{|/user|}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Go Back</a>
+                <a th:href="@{|/user/update/${user.userId}|}" class="btn btn-warning" style="color: white"><i class="fa fa-pencil"></i> Edit</a>
+                <td>
+                    <button class="btn btn-danger" data-toggle="modal" th:data-target="'#confirmDeleteUser' + ${user.userId}">
+                        <span class="btn-inner--text"><i class="fa fa-trash"></i> Delete</span>
+                    </button>
+                    <div class="modal fade" th:id="'confirmDeleteUser' + ${user.userId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Delete Confirmation</h5>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete the user?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                                    <a th:href="@{|delete/${user.userId}|}">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

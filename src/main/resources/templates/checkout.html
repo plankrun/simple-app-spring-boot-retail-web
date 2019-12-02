@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+
+<script lang="JavaScript">
+    function showInput() {
+        return document.getElementById("inputted_quantity").value;
+    }
+</script>
+
+<head>
+    <title>Checkout</title>
+</head>
+
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="container my-5">
+        <h2 class="text-center">Checkout Transaction</h2>
+        <div class="widhtform">
+            <form th:action="@{/transaction/checkout/__${productId}__}" th:object="${transaction}" method="POST" class="custom_form">
+                <p style="margin-bottom: 10px">Product ID: <input type="text" th:field="*{productId}" class="form-control" readonly/></p>
+
+                <p style="margin-bottom: 10px">User ID: <input type="number" th:field="*{userId}" class="form-control" placeholder="Input User ID" required/></p>
+                <div th:if="${errorUserId != null}" style="margin-bottom: 5px">
+                    <small th:text="${errorUserId}" style="color: red"></small>
+                </div>
+
+                <p style="margin-bottom: 10px">Quantity: <input id="inputted_quantity" type="number" th:field="*{quantity}" class="form-control" placeholder="Input quantity" required/></p>
+                <div th:if="${errorQuantity != null}" style="margin-bottom: 5px">
+                    <small th:text="${errorQuantity}" style="color: red"></small>
+                </div>
+
+                <button class="btn btn-primary btn-lg btn-block btn-success" data-toggle="modal" type="button" data-target="#confirm" onclick="showInput()">Submit</button>
+                <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Purchase Confirmation</h5>
+                            </div>
+
+                            <div class="modal-body" th:object="${product}">
+                                <div>
+                                    <p th:inline="text" class="card-text">Product Name: [[${product.productName}]]</p>
+                                    <p th:inline="text" class="card-text">Quantity: 1</p>
+                                    <p th:inline="text" class="card-text">Price: [[${product.price}]]</p>
+
+                                    <div th:with="thsubtotal=${product.price * 1}">
+                                        <div th:with="thtax=${thsubtotal * 0.1}">
+                                            <div th:with="thtotal=${thsubtotal + thtax}">
+                                                <p th:inline="text" class="card-text">Subtotal: [[${thsubtotal}]]</p>
+                                                <p th:inline="text" class="card-text">Tax: [[${thtax}]]</p>
+                                                <p th:inline="text" class="card-text">Total: [[${thtotal}]]</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p style="margin-top: 5px">Are you sure you want to buy this product?</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-success">Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div th:if="${error != null}">
+                <h5 th:text="${error}" style="color: red"></h5>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
